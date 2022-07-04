@@ -1,0 +1,53 @@
+<div class="container">
+    <h3 >Premium Calculator</h3>
+    <form [formGroup]="form" class="">
+        <div>
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" formControlName="name">
+                <div *ngIf="form.controls['name'].invalid" class="text-danger">
+                    Name is required.
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="dob" class="form-label">Date of Birth</label>
+                <input type="date" formControlName="dob" [max]="maxDate" class="form-control" id="dob"
+                    (ngModelChange)="onDobSelectionChange($event)">
+                <div *ngIf="form.controls['dob'].invalid" class="text-danger">
+                    Date of Birth is required.
+                </div>
+            </div>
+            <div class="mb-2">
+                <label for="age" class="form-label">Age</label>
+                <input type="text" disabled readonly class="form-control" id="age" [value]="age">
+            </div>
+            <div class="mb-3">
+                <label for="occupation" class="form-label">Occupation</label>
+                <select class="form-select" formControlName="selectedOccupation"
+                    (ngModelChange)="onOccupationSelectionChange($event)">
+                    <option *ngFor="let item of occupations" [value]="item.occupation">
+                        {{item.name}}
+                    </option>
+                </select>
+                <div *ngIf="form.controls['selectedOccupation'].invalid" class="text-danger">
+                    Occupation is required.
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="sumInsured" class="form-label">Death – Sum Insured</label>
+                <input type="text" formControlName="sumInsured" class="form-control" id="sumInsured">
+                <div *ngIf="form.controls['sumInsured'].invalid" class="text-danger">
+                    Death – Sum Insured is required.
+                </div>
+            </div>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary" [disabled]="!form.valid"
+                    (click)="onSubmit()">Submit</button>
+            </div>
+            <div class="mb-3">
+                <label for="premium" class="form-label">Premium</label>
+                <input type="text" disabled readonly class="form-control" id="premium" [value]="premium">
+            </div>
+        </div>
+    </form>
+</div>
